@@ -6,6 +6,9 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 
 - [Introduction](#introduction)
 - [Setup](#setup)
+- [Details](#details)
+- [Python-Only](#python)
+- [C++/Python](#cpython)
 
 ## Introduction
 
@@ -52,7 +55,41 @@ then close and reopen your terminal. This will use the `module` command to load 
 
 To make sure the setup worked, you should be able to type `clas12root` and receive the ROOT terminal as expected.
 
+---
+
+## Details
+
+With the setup complete, we can now talk about the *hipo* files. As mentioned before, these are large data files that store the collision information. They are readily accessible on ifarm, so long as you know the path to them. 
+
+There is a quick subtely to talk about, first. Suppose you have beam for 4 hours, collect the collision data (could be as much as 100M electron triggers) on disk, and store it. When it comes time for people to analyze that 4 hours of data, it would be **arduous** for everyone to have to convert the raw detector response from 5 or more detectors to form your particles. To mitigate this, a preprocessing stage called *cooking* is taken over by workers called *chefs* (yes, thats right) that run an intensive simulation job on the raw data to produce more meaningful, easier to analysis hipo files. 
+
+For a given raw hipo file, the cooking process produces several "watered-down" hipo files from the parent, each corresponding to a different "train". For studying SIDIS, for example, we use either the "nSidis" or "sidisdvcs" train (depending on the run-group's naming convention) because those reduced hipo files only list events with a trigger electron satisfying a few DIS cuts (W>2, Q2>1, y<0.8). There are many other trains, and the documentation can be typically found in the parent directory of the hipo files (ex: /cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v1/dst/train/README.json). 
+
+Here's a Markdown table representing the paths to different directories containing files, labeled with the run group (With MC for Monte Carlo), beam energy, torus polarization, and number of files:
+
+| Run Group | Beam Energy (GeV) | Torus Polarization | Number of Files | Directory Path |
+|-----------|-------------|--------------------|-----------------|----------------|
+| MC rg-a      | 10.604          | -1                 | 220               | /cache/clas12/rg-a/production/montecarlo/clasdis/fall2018/torus-1/v1/bkg45nA_10604MeV/ |
+| MC rg-a      | 10.604          | +1                 | 25               | /cache/clas12/rg-a/production/montecarlo/clasdis/fall2018/torus+1/v1/bkg50nA_10604MeV/ |
+| rg-a      | 10.6041      | -1                 | 174               | /cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v1/dst/train/nSidis/ |
+| rg-a      | 10.6041      | +1                 | 186               | /cache/clas12/rg-a/production/recon/fall2018/torus+1/pass1/v1/dst/train/nSidis/ |
+| rg-a      | 10.1998      | -1                 | 121               | /cache/clas12/rg-a/production/recon/spring2019/torus-1/pass1/v1/dst/train/nSidis/ |
+| rg-b      | 10.5986   | -1                 | 249               | /cache/clas12/rg-b/production/recon/spring2019/torus-1/pass1/v0/dst/train/sidisdvcs/ |
+| rg-b      | 10.4096   | +1                 | 107               | /cache/clas12/rg-b/production/recon/fall2019/torus+1/pass1/v1/dst/train/sidisdvcs/ |
+| rg-b      | 10.3894   | -1                 | 181               | /cache/clas12/rg-b/production/recon/spring2020/torus-1/pass1/v1/dst/train/sidisdvcs/ |
+| MC rg-c      | 10.5          | ?                 | 999               | /work/cebaf24gev/sidis/reconstructed/polarized-plus-10.5GeV-proton/hipo/ |
+| MC rg-c      | 10.5          | ?                |  649            | /work/cebaf24gev/sidis/reconstructed/polarized-plus-10.5GeV-neutron/hipo/ |
+| rg-c      | 10.5593   | ?                | 25 (as of 5/16/2023)           | /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/ |
+
+*it is important to note that since the rg-c data is still in the process of being cooked, the number of files and its directory path will change*.
+
+In this tutorial, we will be looking at the first cooked run of the RG-A experiment, Run 5032. For your own intrigue, you can learn more about the **R**un **C**onditions for 5032 in the following **D**ata**b**ase (the RCDB) --> [5032](https://clasweb.jlab.org/rcdb/runs/info/5032). The list of the RCDB conditions is documented [here](https://clasweb.jlab.org/rcdb/conditions/)
 
 ---
 
-Feel free to customize and modify the template according to your specific needs. Add additional sections, code examples, or instructions as necessary to make it comprehensive and useful for the CLAS12 data analysis tutorial.
+## Python-Only Analysis
+
+
+---
+
+## C++/Python Analysis
