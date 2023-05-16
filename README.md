@@ -31,7 +31,7 @@ When creating your kernel, use the **CLAS12** notebook image. By default, the ke
 
 2. Next, we need to install several python packages for our analysis. Since all our python analysis will be compiled within Jupyter-Notebook, we must make sure the python packages are installed there. On your notebook page, click the blue `+` button on the top left and create a Terminal. Then, in this terminal, install the following python packages by running...
 ```
-pip install numpy matplotlib hipopy
+pip install numpy matplotlib hipopy copy
 ```
 The package `hipopy` will be used for simple reading of the CLAS12 data with python, albeit slowly. 
 
@@ -109,7 +109,39 @@ After this tutorial, I urge you to check out this [useful wiki](https://clasweb.
 
 ## Python-Only Analysis
 
+From `examples/ex_A_python_only.ipynb` we use `hipopy` to read the banks within the `hipo` file. We determine a scattered electron as the highest energy `pid==11` particle in REC::Particle. We require the electron's energy to be greater than `2.5 GeV`. Then, we apply a basic example of a detector cut on the electron, requiring its PCAL energy deposition to be no less than `100 MeV`. For events that pass this cut, we record the electron's kinematics and the event variables x, Q2, y, and W. 
+
+We then make plots of the recorded variables using `matplotlib.pyplot`. 
+
+Since we are using python to parse the `hipo` file, we are limited by the computational speed of python. Unfortunately, it is quite slow, which is why we only analyze by default 3,000 events in the hipo file, out of 526,752 (for nSidis 5032).  This is why we must turn to C++ for computations over the full file if we want any chance at having a quick analysis script.
 
 ---
 
 ## C++/Python Analysis
+
+This stage is broken apart into two steps: processing and plotting. To process the hipo file using C++...
+
+1. `cd examples/`
+2. `clas12root ex_B1_clas12root.C`
+
+In the processing stage, we apply the same scattered electron cuts defined in the python-only analysis. However, since we use C++ and `clas12root`, the processing speed is much faster, meaning we can analyze the entire 500k event file in around 30 seconds. The output of the processing code is a `.root` file stored in `data/`. This `.root` file contains a TTree with both event and particle kinematics information corresponding to events that passed the cuts. In addition, we store the run number, event number, torus bending sign, and event-by-event helicity. 
+
+To plot, we open the notebook `examples/ex_B2_clas12root.ipynb`. Here, we load in the `.root` file created in the previous step and make a grid of plots for each of the branch variables. 
+
+A sample 2-d binning plotting code is provided as well. Here, we define rectangular bins in the x-Q2 phase space, and plot the momentum distribution of electrons within each x-Q2 bin. 
+
+---
+
+## Faraday Cup Analysis
+
+A sample script `examples/ex_C_fcupgated.C` is included to show how to read the Faraday Cup charge for a given RG-C run. It reads the `HEL::Scaler` bank to sum the accumulated charge for each helicity configuration. It then outputs these values. 
+
+As a side note, the `HEL::scaler` bank is produced during cooking from the data stored in the `RAW::scaler` bank, which should not (to my knowledge) be in the cooked hipo files. Details about this can be found in [this wiki](https://clasweb.jlab.org/wiki/index.php/CLAS12_DSTs#Special_Banks) and [this document](https://github.com/JeffersonLab/clas12-offline-software/raw/development/common-tools/clas-detector/doc/Scaler%20information%20in%20CLAS12%202018%20data.docx)
+
+---
+
+## Contact 
+
+Author: Gregory Matousek
+Institution: Duke University
+Email: gregory.matousek@duke.edu
