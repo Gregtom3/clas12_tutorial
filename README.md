@@ -145,5 +145,8 @@ As a side note, the `HEL::scaler` bank is produced during cooking from the data 
 ## Contact 
 
 Author: Gregory Matousek
+
 Institution: Duke University
+
 Email: gregory.matousek@duke.edu
+
