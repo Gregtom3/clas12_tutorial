@@ -7,9 +7,9 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Introduction](#introduction)
 - [Setup](#setup)
 - [Details](#details)
-- [Python-Only](#python)
-- [C++/Python](#cpython)
-- [Faraday Cup Analysis](#faraday)
+- [Python Only](#Python-Only-Analysis)
+- [C++/Python](#C++-and-Python-Analysis)
+- [Faraday Cup Analysis](#Faraday-Cup-Analysis)
 - [Contact](#contact)
 
 ## Introduction
@@ -109,7 +109,7 @@ After this tutorial, I urge you to check out this [useful wiki](https://clasweb.
 
 ---
 
-## Python-Only Analysis
+## Python Only Analysis
 
 From `examples/ex_A_python_only.ipynb` we use `hipopy` to read the banks within the `hipo` file. We determine a scattered electron as the highest energy `pid==11` particle in REC::Particle. We require the electron's energy to be greater than `2.5 GeV`. Then, we apply a basic example of a detector cut on the electron, requiring its PCAL energy deposition to be no less than `100 MeV`. For events that pass this cut, we record the electron's kinematics and the event variables x, Q2, y, and W. 
 
@@ -119,7 +119,7 @@ Since we are using python to parse the `hipo` file, we are limited by the comput
 
 ---
 
-## C++/Python Analysis
+## C++ and Python Analysis
 
 This stage is broken apart into two steps: processing and plotting. To process the hipo file using C++...
 
