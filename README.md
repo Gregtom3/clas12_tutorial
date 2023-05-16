@@ -8,7 +8,7 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Setup](#setup)
 - [Details](#details)
 - [Python Only](#Python-Only-Analysis)
-- [C++/Python](#C++-and-Python-Analysis)
+- [C++/Python](#Cpp-and-Python-Analysis)
 - [Faraday Cup Analysis](#Faraday-Cup-Analysis)
 - [Contact](#contact)
 
@@ -119,7 +119,7 @@ Since we are using python to parse the `hipo` file, we are limited by the comput
 
 ---
 
-## C++ and Python Analysis
+## Cpp and Python Analysis
 
 This stage is broken apart into two steps: processing and plotting. To process the hipo file using C++...
 
