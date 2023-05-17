@@ -11,6 +11,7 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Example B: C++/Python](#Cpp-and-Python-Analysis)
 - [Example C: Faraday Cup Analysis](#Faraday-Cup-Analysis)
 - [Example D: Reading the RCDB](#RCDB-Analysis)
+- [Example D: Reading the CCDB](#CCDB-Analysis)
 - [Contact](#contact)
 
 ## Introduction
@@ -145,13 +146,28 @@ As a side note, the `HEL::scaler` bank is produced during cooking from the data 
 
 ## RCDB Analysis
 
-A sample script `examples/ex_D_readRCDB.py` is included to show how to read in values from the RCDB. To run the code, provide it with a list of `hipo` files, followed by the RCDB condition you'd like to see outputted. Below I show the usage by putting two hipo file arguments, followed by the condition "events_rate". The list of the RCDB conditions is documented [here](https://clasweb.jlab.org/rcdb/conditions/):
+A sample script `examples/ex_D1_readRCDB.py` is included to show how to read in values from the RCDB. To run the code, provide it with a list of `hipo` files, followed by the RCDB condition you'd like to see outputted. Below I show the usage by putting two hipo file arguments, followed by the condition "events_rate". The list of the RCDB conditions is documented [here](https://clasweb.jlab.org/rcdb/conditions/):
 
 ```
-python ex_D_readRCDB.py /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016352.hipo /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016353.hipo events_rate
+python ex_D1_readRCDB.py /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016352.hipo /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016353.hipo events_rate
 ```
 
-Note that this program pulls the "run numbers" from the hipo files, which was useful, at the time, for my analysis. You can edit this code, which should be good practice (or you can use ChatGPT ;) ) to read in **run numbers** as opposed to **files**.
+Note that this program pulls the "run numbers" from the hipo files, which was useful, at the time, for my analysis. You can use `ex_D2_readRCDB.py` to read from a range of run numbers, and parse any number of run conditions
+
+```
+python ex_D2_readRCDB.py 16300 16400 events_rate target_polarization target 
+```
+
+---
+
+## CCDB Analysis
+
+A sample script `examples/ex_E_readCCDB.py` is included to show how to read in values from the CCDB, namely the Faraday Cup calibration constants. This program will produce a `.csv` file containing the run min, run max, slope, offset, and attenuation, exactly how it is read [from the CCDB](https://clasweb.jlab.org/cgi-bin/ccdb/versions?table=/runcontrol/fcup):
+
+```
+python ex_E_readCCDB.py
+```
+
 
 ---
 
