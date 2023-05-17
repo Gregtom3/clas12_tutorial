@@ -28,7 +28,7 @@ Lastly, the data we will analyze is stored in files with a .hipo extension, typi
 
 For this tutorial, I will be assuming you have connection to Jefferson Lab's ifarm and have your own directory in `/work/clas12/users/` or some equivalent. 
 
-1. The first step is to obtain access to a Jupyter-Notebook via the web that links to your filesystem on the farm. This is ideal for programming long scripts, creating/testing analysis macros, and viewing plots. There will be some limitations to this which will we get to later, but for now, [visit here](https://scicomp.jlab.org/docs/JupyterHub) and follow the instructions for obtaining your kernel.
+1. The first step is to obtain access to a Jupyter-Notebook via the web that links to your filesystem on the farm. This is ideal for programming long scripts, creating/testing analysis macros, and viewing plots. There will be some limitations to this which will we get to later, but for now, -->   [visit here](https://scicomp.jlab.org/docs/JupyterHub)   <-- and follow the instructions for obtaining your kernel.
 When creating your kernel, use the **CLAS12** notebook image. By default, the kernel opens your home directory on the farm at `/home/<USERNAME>/`. Since this directory has a limited storage space, I would reccommend you do all your programming in your `/work` directory or some equivalent. It may be helpful to provide a quick file link to your `/work` from your default `/home` directory, this way whenever you open Jupyter-Notebook on ifarm you can open your work directory with a single click. To set this up on ifarm, do `ln -s /path/to/work/directory /home/<USERNAME>/link_to_workspace`. This will create a link called "link_to_workspace" in your home directory that you can double click while using Jupyter to enter you work directory. 
 
 2. Next, we need to install several python packages for our analysis. Since all our python analysis will be compiled within Jupyter-Notebook, we must make sure the python packages are installed there. On your notebook page, click the blue `+` button on the top left and create a Terminal. Then, in this terminal, install the following python packages by running...
@@ -151,6 +151,12 @@ python ex_D_readRCDB.py /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train
 ```
 
 Note that this program pulls the "run numbers" from the hipo files, which was useful, at the time, for my analysis. You can edit this code, which should be good practice (or you can use ChatGPT ;) ) to read in **run numbers** as opposed to **files**.
+
+---
+
+## Super Useful Links
+
+- [CLAS12 Discourse Forum](https://clas12.discourse.group/)
 
 ---
 
