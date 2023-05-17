@@ -94,10 +94,10 @@ for i in range(len(df) - 1):
         print(25*"---")
 
 # Save dataframe as CSV
-df.to_csv('runcontrol_data.csv', index=False)
+df.to_csv('CCDB_table.csv', index=False)
 
 ################################################################
 # Display the CSV
 ################################################################
 print(df)
-print("Created <runcontrol_data.csv>")
+print("Created < CCDB_table.csv>")
