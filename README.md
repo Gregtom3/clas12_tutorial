@@ -10,6 +10,7 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Example A: Python Only](#Python-Only-Analysis)
 - [Example B: C++/Python](#Cpp-and-Python-Analysis)
 - [Example C: Faraday Cup Analysis](#Faraday-Cup-Analysis)
+- [Example D: Reading the RCDB](#RCDB-Analysis)
 - [Contact](#contact)
 
 ## Introduction
@@ -28,12 +29,12 @@ Lastly, the data we will analyze is stored in files with a .hipo extension, typi
 
 For this tutorial, I will be assuming you have connection to Jefferson Lab's ifarm and have your own directory in `/work/clas12/users/` or some equivalent. 
 
-1. The first step is to obtain access to a Jupyter-Notebook via the web that links to your filesystem on the farm. This is ideal for programming long scripts, creating/testing analysis macros, and viewing plots. There will be some limitations to this which will we get to later, but for now, [visit here](https://scicomp.jlab.org/docs/JupyterHub) and follow the instructions for obtaining your kernel.
+1. The first step is to obtain access to a Jupyter-Notebook via the web that links to your filesystem on the farm. This is ideal for programming long scripts, creating/testing analysis macros, and viewing plots. There will be some limitations to this which will we get to later, but for now, -->   [visit here](https://scicomp.jlab.org/docs/JupyterHub)   <-- and follow the instructions for obtaining your kernel.
 When creating your kernel, use the **CLAS12** notebook image. By default, the kernel opens your home directory on the farm at `/home/<USERNAME>/`. Since this directory has a limited storage space, I would reccommend you do all your programming in your `/work` directory or some equivalent. It may be helpful to provide a quick file link to your `/work` from your default `/home` directory, this way whenever you open Jupyter-Notebook on ifarm you can open your work directory with a single click. To set this up on ifarm, do `ln -s /path/to/work/directory /home/<USERNAME>/link_to_workspace`. This will create a link called "link_to_workspace" in your home directory that you can double click while using Jupyter to enter you work directory. 
 
 2. Next, we need to install several python packages for our analysis. Since all our python analysis will be compiled within Jupyter-Notebook, we must make sure the python packages are installed there. On your notebook page, click the blue `+` button on the top left and create a Terminal. Then, in this terminal, install the following python packages by running...
 ```
-pip install numpy matplotlib hipopy copy
+pip install numpy matplotlib hipopy
 ```
 The package `hipopy` will be used for simple reading of the CLAS12 data with python, albeit slowly. 
 
@@ -139,6 +140,24 @@ A sample 2-d binning plotting code is provided as well. Here, we define rectangu
 A sample script `examples/ex_C_fcupgated.C` is included to show how to read the Faraday Cup charge for a given RG-C run. It reads the `HEL::Scaler` bank to sum the accumulated charge for each helicity configuration. It then outputs these values. 
 
 As a side note, the `HEL::scaler` bank is produced during cooking from the data stored in the `RAW::scaler` bank, which should not (to my knowledge) be in the cooked hipo files. Details about this can be found in [this wiki](https://clasweb.jlab.org/wiki/index.php/CLAS12_DSTs#Special_Banks) and [this document](https://github.com/JeffersonLab/clas12-offline-software/raw/development/common-tools/clas-detector/doc/Scaler%20information%20in%20CLAS12%202018%20data.docx)
+
+---
+
+## RCDB Analysis
+
+A sample script `examples/ex_D_readRCDB.py` is included to show how to read in values from the RCDB. To run the code, provide it with a list of `hipo` files, followed by the RCDB condition you'd like to see outputted. Below I show the usage by putting two hipo file arguments, followed by the condition "events_rate". The list of the RCDB conditions is documented [here](https://clasweb.jlab.org/rcdb/conditions/):
+
+```
+python ex_D_readRCDB.py /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016352.hipo /volatile/clas12/rg-c/production/dst/8.7.0_TBT/dst/train/sidisdvcs/sidisdvcs_016353.hipo events_rate
+```
+
+Note that this program pulls the "run numbers" from the hipo files, which was useful, at the time, for my analysis. You can edit this code, which should be good practice (or you can use ChatGPT ;) ) to read in **run numbers** as opposed to **files**.
+
+---
+
+## Super Useful Links
+
+- [CLAS12 Discourse Forum](https://clas12.discourse.group/)
 
 ---
 
