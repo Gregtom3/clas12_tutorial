@@ -11,7 +11,7 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Example B: C++/Python](#Cpp-and-Python-Analysis)
 - [Example C: Faraday Cup Analysis](#Faraday-Cup-Analysis)
 - [Example D: Reading the RCDB](#RCDB-Analysis)
-- [Example D: Reading the CCDB](#CCDB-Analysis)
+- [Example E: Reading the CCDB](#CCDB-Analysis)
 - [Contact](#contact)
 
 ## Introduction
