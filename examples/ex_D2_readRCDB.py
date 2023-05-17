@@ -1,3 +1,24 @@
+"""
+Script: RCDB Data Extraction
+Description: This script retrieves condition values from the RCDB (Run Conditions Database) for a given range of runs
+             and specified conditions. It builds a table with the run numbers and their corresponding condition values,
+             and prints the table in CSV format.
+
+Usage: python ex_D2_readRCDB.py runMin runMax condition1 condition2 ...
+
+Arguments:
+    - runMin: Minimum run number (inclusive) in the range.
+    - runMax: Maximum run number (inclusive) in the range.
+    - condition1, condition2, ...: Names of the conditions to retrieve from the RCDB.
+
+Example: python ex_D2_readRCDB.py 16400 16500 events_rate target half_wave_plate
+
+Output: The script prints the table of run numbers and condition values in CSV format, with column headers.
+
+"""
+
+
+
 import sys
 sys.path.append("/work/clas12/users/gmat/packages/clas12root/rcdb/python/")
 import rcdb
