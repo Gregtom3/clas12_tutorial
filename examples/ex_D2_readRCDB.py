@@ -10,38 +10,51 @@ from rcdb.model import ConditionType
 db = RCDBProvider("mysql://rcdb@clasdb/rcdb")
 
 # Check if the number of command-line arguments is correct
-if len(sys.argv) != 4:
-    print("Usage: python script.py runMin runMax <RCDB Condition>")
+if len(sys.argv) < 4:
+    print("Usage: python script.py runMin runMax condition1 condition2 ...")
     sys.exit(1)
 
 # Get the command-line arguments
 run_min = int(sys.argv[1])
 run_max = int(sys.argv[2])
-condition = str(sys.argv[3])
+conditions = sys.argv[3:]
 
-# Initialize the list to store the output
-output = []
+# Initialize the table dictionary to store the output
+table = {}
 
 # Iterate over the range of runs
 for run in range(run_min, run_max + 1):
     # Get run from database
     db_run = db.get_run(run)
     
-    # Get the condition value
-    try:
-        condition_value = db_run.get_condition(condition).value
-    except:
-        print("Run", run, "failed to get data from RCDB...skipping...")
-        continue
+    # Initialize the row dictionary for the current run
+    row = {'Run': run}
     
-    if condition == "target":
-        condition_value = condition_value.strip()
-        if condition_value == "12C":
-            condition_value = "C"
+    # Get the condition values
+    for condition in conditions:
+        try:
+            condition_value = db_run.get_condition(condition).value
+        except:
+            print("Run", run, "failed to get data for condition", condition, "...skipping...")
+            continue
+        
+        if condition == "target":
+            condition_value = condition_value.strip()
+            if condition_value == "12C":
+                condition_value = "C"
+        
+        # Add condition value to the row dictionary
+        row[condition] = condition_value
     
-    # Append to output
-    output.append(str(run) + "," + str(condition_value))
+    # Add the row dictionary to the table dictionary
+    table[run] = row
 
-# Print the output
-for item in output:
-    print(item)
+# Print the table header
+header = ['Run'] + conditions
+print(','.join(header))
+
+# Print the table rows
+for run in table:
+    row = [str(table[run].get(condition, '')) for condition in header]
+    print(','.join(row))
+    
