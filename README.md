@@ -10,6 +10,7 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Example A: Python Only](#Python-Only-Analysis)
 - [Example B: C++/Python](#Cpp-and-Python-Analysis)
 - [Example C: Faraday Cup Analysis](#Faraday-Cup-Analysis)
+- [Example D: Reading the RCDB](#RCDB-Analysis)
 - [Contact](#contact)
 
 ## Introduction
