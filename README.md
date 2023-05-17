@@ -7,9 +7,9 @@ This repository contains a tutorial on how to analyze data from the CLAS12 exper
 - [Introduction](#introduction)
 - [Setup](#setup)
 - [Details](#details)
-- [Python Only](#Python-Only-Analysis)
-- [C++/Python](#Cpp-and-Python-Analysis)
-- [Faraday Cup Analysis](#Faraday-Cup-Analysis)
+- [Example A: Python Only](#Python-Only-Analysis)
+- [Example B: C++/Python](#Cpp-and-Python-Analysis)
+- [Example C: Faraday Cup Analysis](#Faraday-Cup-Analysis)
 - [Contact](#contact)
 
 ## Introduction
