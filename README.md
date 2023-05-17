@@ -34,7 +34,7 @@ When creating your kernel, use the **CLAS12** notebook image. By default, the ke
 
 2. Next, we need to install several python packages for our analysis. Since all our python analysis will be compiled within Jupyter-Notebook, we must make sure the python packages are installed there. On your notebook page, click the blue `+` button on the top left and create a Terminal. Then, in this terminal, install the following python packages by running...
 ```
-pip install numpy matplotlib hipopy pymysql six sqlalchemy pandas
+pip install numpy matplotlib hipopy pymysql six sqlalchemy pandas PyMySQL
 ```
 The package `hipopy` will be used for simple reading of the CLAS12 data with python, albeit slowly. 
 
