@@ -46,8 +46,9 @@ git clone https://github.com/Gregtom3/clas12_tutorial/
 
 4. As mentioned earlier, we will be using C++ at some point to read the collision data faster than python could ever hope to do. Historically, software development for CLAS was done mainly in Java. The consequence of this is that you will need to install the program `clas12root` which is a sort of go-between for processing in C++. Luckily, this program is able to be accessed directly on ifarm using `module`. To do so, you will need to start by editing you `~/.cshrc` in your home directory on ifarm (this can be done using the ssh terminal). Add the following lines...
 ```
-source /group/clas12/packages/setup.csh
-module load clas12/pro
+module use /cvmfs/oasis.opensciencegrid.org/jlab/hallb/clas12/sw/modulefiles
+module load clas12
+
 
 set PATH=${PATH}:${CLAS12ROOT}/bin
 set RCDB_HOME=${CLAS12ROOT}/rcdb
